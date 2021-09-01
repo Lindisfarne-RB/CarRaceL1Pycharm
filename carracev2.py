@@ -9,7 +9,6 @@ for users to see which car has won.
 ● Clearly state which car won and give the ‘time’ (ie: number of steps needed).Al
 '''
 
-
 import random
 
 def points():
@@ -88,10 +87,44 @@ def thirdlargest(listofcars):
     print("Third car is:", sorted(listofcars)[-3])
     return
 
-def checkcarnum():
+def checkcar_distnum(question,low,high):
+    error = "Please enter in the car range "
+    valid = False
+    while True:
+        try:
+
+            car_num = int(input(question))
+            if low<car_num <= high :
+                return car_num
+
+            else:
+                print(error)
+        except ValueError:
+            print(error)
+
+    return
+
+
+def checkdistance(question,low,high):
+    error = "Please enter distance between 5-15"
+    valid = False
+    while True:
+        try:
+
+            dist = int(input(question))
+            if dist > low and dist < high:
+                return dist
+
+            else:
+                print(error)
+        except ValueError:
+            print(error)
+
     return
 
 def instruction_play():
+    print("This is how you play")
+    print("Let's start")
     return
 
 def roundsplayed():
@@ -105,7 +138,7 @@ def yes_no():
     return
 
 
-
+#main section starts here
 
 yes_no()
 rounds=roundsplayed()
@@ -115,23 +148,13 @@ ctr = 1
 while ctr<= rounds:
     print("--------------Round ", ctr, "--------------------")
 
-    car_num = int(input("Enter car num 1-6"))
-    if car_num > 6 or car_num < 1:
-        raise Exception(" car_num should be between 1-6: {}".format(car_num))
+    car_num= checkcar_distnum("Enter car num 1-6",1,6)
 
-    dist = int(input("Enter distance 5-15"))
+    print("You are betting on car num ", car_num)
+    dist = checkcar_distnum("Enter distance 5-15 ",5,15)
+    print("We are going $ ")
     winner_car_num = roll(dist)
     print("Winner = car ", winner_car_num + 1)
 
     ctr += 1
-
-#try:
- #   guess = int(input("enter guess"))
-#except (ValueError):
- #   print(("incorrect entry, Retry"))
-
-#try:
- #   guess = int(input("enter guess"))
-#except (ValueError):
- #   print(("incorrect entry, Retry"))
 
