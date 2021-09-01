@@ -8,6 +8,9 @@ necessary to show each step but the final outcome should be shown and it should 
 for users to see which car has won.
 ● Clearly state which car won and give the ‘time’ (ie: number of steps needed).Al
 '''
+#This program has some extra functions that are not called.
+# This program does not assign any points to the winner cars
+# this program does not count leader board correctly - needs to work on second and third position
 
 import random
 
@@ -23,6 +26,7 @@ def positions():
 
 
 def findLargest(listofcars):
+    print("in largest")
     secondLargest = listofcars[0]
     largest = listofcars[0]
     for i in range(len(listofcars)):
@@ -32,7 +36,7 @@ def findLargest(listofcars):
     for i in range(len(listofcars)):
         if listofcars[i] > secondLargest and listofcars[i] != largest:
             secondLargest = listofcars[i]
-
+    print(secondLargest)
     return secondLargest
 
 def roll(dist):
@@ -74,9 +78,13 @@ def roll(dist):
             max_idx = listofcars.index(max_value)
 
 
-    print('Maximum value:', max_value, "At index: ", max_idx)
+    #print('Maximum value:', max_value, "At index: ", max_idx+1)
+    print("-----------LEADER BORAD ------------")
+    print("First position  - car num", max_idx+1 ,"run distance", max_value , " kms")
+    #findLargest(listofcars)
     seclar=seclargest(listofcars)
     thirdlar=thirdlargest(listofcars)
+
     return(max_idx)
 
 def seclargest(listofcars):
@@ -88,13 +96,13 @@ def thirdlargest(listofcars):
     return
 
 def checkcar_distnum(question,low,high):
-    error = "Please enter in the car range "
+    error = "Please enter in the specified range "
     valid = False
     while True:
         try:
 
             car_num = int(input(question))
-            if low<car_num <= high :
+            if low <= car_num <= high :
                 return car_num
 
             else:
@@ -128,7 +136,8 @@ def instruction_play():
     return
 
 def roundsplayed():
-    rounds=int(input("How many rounds"))
+    #rounds = int(input("How many rounds 1 - 10 "))
+    rounds = checkcar_distnum("How many rounds: Enter between 1-10 ",1,10)
     return rounds
 
 def yes_no():
@@ -136,7 +145,7 @@ def yes_no():
     if played == "No" or played == "NO" or played == "no":
         instruction_play()
     return
-
+""
 
 #main section starts here
 
@@ -145,7 +154,7 @@ rounds=roundsplayed()
 ctr = 1
 
 
-while ctr<= rounds:
+while ctr <= rounds:
     print("--------------Round ", ctr, "--------------------")
 
     car_num= checkcar_distnum("Enter car num 1-6",1,6)
